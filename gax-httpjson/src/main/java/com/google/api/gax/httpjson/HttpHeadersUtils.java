@@ -91,4 +91,19 @@ public class HttpHeadersUtils {
             + " from string representation is not supported. Most likely an"
             + " incompatible version of google-http-client was used.");
   }
+  private static Object fromString2(Class<?> clazz, String stringValue) {
+    if (String.class == clazz) {
+      return stringValue;
+    } else if (Long.class == clazz) {
+      return Long.valueOf(stringValue);
+    }
+
+    // It seems only String and Long have chances of being used. Not adding other
+    // classes to avoid having dead code, even though without them this looks incomplete.
+    throw new IllegalArgumentException(
+        "Instantiating "
+            + clazz
+            + " from string representation is not supported. Most likely an"
+            + " incompatible version of google-http-client was used.");
+  }
 }
